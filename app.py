@@ -34,20 +34,22 @@ def register():
 
 @app.route('/start')
 def start_game():
-    if len(players) < 5:
+    all_players = Player.query.all()
+    if len(all_players) < 5:
         return "Le jeu nécessite au moins 5 joueurs."
 
     # Distribuer les rôles
-    roles['loups_garous'] = random.sample(players, 2)
-    roles['voyante'] = random.choice(players)
-    roles['villageois'] = [player.name for player in Player.query.filter(~Player.name.in_(roles['loups_garous'] + [roles['voyante']])).all()]
+    random.shuffle(all_players)
+    roles['loups_garous'] = [player.name for player in all_players[:2]]
+    roles['voyante'] = all_players[2].name
+    roles['villageois'] = [player.name for player in all_players[3:]]
 
     return redirect('/night')
 
 
 @app.route('/night')
 def night_phase():
-    return render_template('night.html', players=players, roles=roles)
+    return render_template('night.html', players=roles['villageois'], roles=roles)
 
 
 @app.route('/vote', methods=['POST'])
