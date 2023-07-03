@@ -14,13 +14,13 @@ class Player(db.Model):
     def __repr__(self):
         return self.name
 
-players = []
 roles = {}
 
 
 @app.route('/')
 def home():
-    return render_template('index.html')
+    players = Player.query.all()
+    return render_template('index.html', players=players)
 
 
 @app.route('/register', methods=['POST'])
@@ -35,21 +35,45 @@ def register():
 @app.route('/start')
 def start_game():
     all_players = Player.query.all()
-    if len(all_players) < 5:
-        return "Le jeu nécessite au moins 5 joueurs."
+    num_players = len(all_players)
+    
+    if num_players < 5 or num_players > 12:
+        return "Le jeu nécessite entre 5 et 12 joueurs."
 
-    # Distribuer les rôles
+    # Distribution des rôles
     random.shuffle(all_players)
-    roles['loups_garous'] = [player.name for player in all_players[:2]]
-    roles['voyante'] = all_players[2].name
-    roles['villageois'] = [player.name for player in all_players[3:]]
+    
+    if num_players >= 5 and num_players <= 7:
+        roles['loups_garous'] = [player.name for player in all_players[:2]]
+    elif num_players >= 8 and num_players <= 12:
+        roles['loups_garous'] = [player.name for player in all_players[:3]]
+    
+    roles['voyante'] = all_players[num_players - 3].name
+    roles['villageois'] = [player.name for player in all_players[num_players - 2:]]
+    
+    if num_players >= 8:
+        roles['chasseur'] = all_players[-1].name
+        
+    if num_players >= 9:
+        roles['sorciere'] = all_players[-2].name
+        
+    if num_players == 10:
+        roles['petite_fille'] = all_players[-3].name
+        
+    if num_players >= 6:
+        roles['cupidon'] = all_players[-4].name
 
-    return redirect('/night')
+    return redirect('/recap')
 
 
 @app.route('/night')
 def night_phase():
     return render_template('night.html', players=roles['villageois'], roles=roles)
+
+
+@app.route('/day')
+def day_phase():
+    return render_template('day.html')
 
 
 @app.route('/vote', methods=['POST'])
@@ -64,6 +88,10 @@ def show_result():
     eliminated_player = request.args.get('eliminated_player')
     return render_template('result.html', eliminated_player=eliminated_player)
 
+
+@app.route('/recap')
+def recap():
+    return render_template('recap.html', roles=roles)
 
 
 if __name__ == '__main__':

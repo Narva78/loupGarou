@@ -1,22 +1,18 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <title>Les Loups-Garous de Thiercelieux - Phase de nuit</title>
+    <title>Jeu du Loup Garou - Nuit</title>
+    <!-- style.css-->
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/normalize/8.0.1/normalize.min.css">
+        
 </head>
 <body>
-    <h1>Phase de nuit</h1>
-    <h2>Liste des joueurs :</h2>
-    <ul>
-        {% for player in players %}
-            <li>{{ player }}</li>
-        {% endfor %}
-    </ul>
-    <h2>Rôles :</h2>
-    <ul>
-        <li>Loups-Garous : {{ roles.loups_garous }}</li>
-        <li>Voyante : {{ roles.voyante }}</li>
-        <li>Villageois : {{ roles.villageois }}</li>
-    </ul>
-    <!-- code phase de nuit -->
+    <div class="container">
+        <h1><u>Jeu du Loup Garou</u></h1>
+        <h2>Phase de la Nuit</h2>
+        <p>Les loups-garous se réveillent et choisissent leur cible.</p>
+        <a href="/result" class="btn">Passer à la phase de vote</a>
+    </div>
 </body>
 </html>
