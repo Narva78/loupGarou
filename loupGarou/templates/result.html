@@ -1,0 +1,16 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Les Loups-Garous de Thiercelieux - Résultat du vote</title>
+</head>
+<body>
+    <h1>Résultat du vote</h1>
+    {% if eliminated_player %}
+        <p>Le joueur éliminé est : {{ eliminated_player }}</p>
+    {% else %}
+        <p>Aucun joueur éliminé.</p>
+    {% endif %}
+    <!-- Ajoutez ici le code supplémentaire pour afficher d'autres informations sur le jeu -->
+    <a href="/end">Terminer le jeu</a>
+</body>
+</html>

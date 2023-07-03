@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Les Loups-Garous de Thiercelieux</title>
+</head>
+<body>
+    <h1>Inscription des joueurs</h1>
+    <form action="/register" method="post">
+        <input type="text" name="name" placeholder="Entrez votre nom">
+        <button type="submit">S'inscrire</button>
+    </form>
+    <h2>Liste des joueurs inscrits :</h2>
+    <ul>
+        {% for player in players %}
+            <li>{{ player }}</li>
+        {% endfor %}
+    </ul>
+    <a href="/start">Démarrer le jeu</a>
+</body>
+</html>

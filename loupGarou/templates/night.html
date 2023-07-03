@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Les Loups-Garous de Thiercelieux - Phase de nuit</title>
+</head>
+<body>
+    <h1>Phase de nuit</h1>
+    <h2>Liste des joueurs :</h2>
+    <ul>
+        {% for player in players %}
+            <li>{{ player }}</li>
+        {% endfor %}
+    </ul>
+    <h2>Rôles :</h2>
+    <ul>
+        <li>Loups-Garous : {{ roles.loups_garous }}</li>
+        <li>Voyante : {{ roles.voyante }}</li>
+        <li>Villageois : {{ roles.villageois }}</li>
+    </ul>
+    <!-- code phase de nuit -->
+</body>
+</html>
