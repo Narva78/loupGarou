@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Jeu du Loup Garou - Action de la Sorcière</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+    <div class="container">
+        <h1>Action de la Sorcière</h1>
+        <h2>Les joueurs :</h2>
+        <ul>
+            {% for player in players %}
+                <li>{{ player }}</li>
+            {% endfor %}
+        </ul>
+        <form action="/witch_action_action" method="post">
+            <!-- Ajoutez ici les champs et les boutons pour l'action de la sorcière -->
+            <input type="submit" value="Continuer">
+        </form>
+    </div>
+</body>
+</html>

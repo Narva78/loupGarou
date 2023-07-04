@@ -1,19 +1,19 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <title>Jeu du Loup Garou - Phase de Jour</title>
+    <title>Jeu du Loup Garou - Vote des Loups-Garous</title>
     <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
 </head>
 <body>
     <div class="container">
-        <h1>Phase de Jour</h1>
-        <h2>Les Villageois :</h2>
+        <h1>Vote des Loups-Garous</h1>
+        <h2>Les Loups-Garous :</h2>
         <ul>
             {% for player in players %}
                 <li>{{ player }}</li>
             {% endfor %}
         </ul>
-        <form action="/vote" method="post">
+        <form action="/wolf_vote_action" method="post">
             <p>Votez pour éliminer un joueur :</p>
             <select name="eliminated_player">
                 {% for player in players %}

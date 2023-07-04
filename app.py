@@ -63,7 +63,7 @@ def start_game():
     if num_players >= 6:
         roles['cupidon'] = all_players[-4].name
 
-    return redirect('/recap')
+    return redirect('/night')
 
 
 @app.route('/night')
@@ -71,9 +71,42 @@ def night_phase():
     return render_template('night.html', players=roles['villageois'], roles=roles)
 
 
+@app.route('/night_action', methods=['POST'])
+def process_night_action():
+    # Traitement des actions de la nuit
+    # ...
+    return redirect('/wolf_vote')
+
+
+@app.route('/wolf_vote')
+def wolf_vote():
+    # Affichage du vote des loups-garous
+    return render_template('wolf_vote.html', players=roles['loups_garous'])
+
+
+@app.route('/wolf_vote_action', methods=['POST'])
+def process_wolf_vote():
+    # Traitement du vote des loups-garous
+    # ...
+    return redirect('/witch_action')
+
+
+@app.route('/witch_action')
+def witch_action():
+    # Affichage de l'action de la sorcière
+    return render_template('witch_action.html', players=roles['sorciere'])
+
+
+@app.route('/witch_action_action', methods=['POST'])
+def process_witch_action():
+    # Traitement de l'action de la sorcière
+    # ...
+    return redirect('/day')
+
+
 @app.route('/day')
 def day_phase():
-    return render_template('day.html')
+    return render_template('day.html', players=roles['villageois'])
 
 
 @app.route('/vote', methods=['POST'])

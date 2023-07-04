@@ -1,18 +1,22 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <title>Jeu du Loup Garou - Nuit</title>
-    <!-- style.css-->
+    <title>Jeu du Loup Garou - Phase de Nuit</title>
     <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/normalize/8.0.1/normalize.min.css">
-        
 </head>
 <body>
     <div class="container">
-        <h1><u>Jeu du Loup Garou</u></h1>
-        <h2>Phase de la Nuit</h2>
-        <p>Les loups-garous se réveillent et choisissent leur cible.</p>
-        <a href="/result" class="btn">Passer à la phase de vote</a>
+        <h1>Phase de Nuit</h1>
+        <h2>Les rôles : </h2>
+        <ul>
+            {% for role, player in roles.items() %}
+                <li>{{ role }} : {{ player }}</li>
+            {% endfor %}
+        </ul>
+        <form action="/night_action" method="post">
+            <!-- Ajoutez ici les champs et les boutons pour les actions de la nuit -->
+            <input type="submit" value="Continuer">
+        </form>
     </div>
 </body>
 </html>
