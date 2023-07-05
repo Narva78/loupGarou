@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Jeu du Loup-Garou - Jour</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+    <div class="container">
+        <h1>Jour</h1>
+        <h2>Le Village se réveille</h2>
+        <h3>Discussion et vote</h3>
+        
+        <form action="/vote" method="post">
+            <label for="eliminated_player">Vote pour éliminer un joueur :</label>
+            <select class="liste" id="eliminated_player" name="eliminated_player">
+                {% for player in players %}
+                    <option value="{{ player }}">{{ player }}</option>
+                {% endfor %}
+            </select>
+            <br><br>
+            <input class="btn" type="submit" value="Voter">
+        </form>
+    </div>
+</body>
+</html>

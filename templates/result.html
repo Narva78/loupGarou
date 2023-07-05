@@ -1,0 +1,16 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Jeu du Loup Garou - Résultat</title>
+    <!-- style.css-->
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/normalize/8.0.1/normalize.min.css">
+</head>
+<body>
+    <div class="container">
+        <h1>Jeu du Loup Garou</h1>
+        <h2>Résultat :</h2>
+        <p class="result-text">Le joueur éliminé est : <strong>{{ eliminated_player }}</strong></p>
+    </div>
+</body>
+</html>

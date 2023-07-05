@@ -1,0 +1,32 @@
+<link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+<html>
+<head>
+    <title>Jeu du Loup-Garou - Nuit</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+    <div class="container">
+        <h1>Nuit</h1>
+        <h2>Cupidon se réveille</h2>
+        <p>Cupidon, sélectionnez deux joueurs à lier :</p>
+        <form action="/cupidon_action" method="POST">
+            <div class="form_group">
+            <select class="liste" class="liste" name="player1" id="player1">
+                {% for player in players %}
+                    <option value="{{ player }}">{{ player }}</option>
+                {% endfor %}
+            </select>
+        </div>
+        <div class="form_group">
+            <br><br>
+            <select class="liste" class="liste" name="player2" id="player2">
+                {% for player in players %}
+                    <option value="{{ player }}">{{ player }}</option>
+                {% endfor %}
+            </select>
+        </div>
+            <input class="btn_start" type="submit" value="Lier 2 joueurs">
+        </form>
+    </div>
+</body>
+</html>

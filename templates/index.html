@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Jeu du Loup Garou</title>
+    <!-- style.css-->
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/normalize/8.0.1/normalize.min.css">
+</head>
+<body>
+    <div class="container">
+        <h1><u>Jeu du Loup Garou</u></h1>
+        <div>
+            <h2>Inscription des joueurs</h2>
+            <form action="/register" method="post">
+                <div class="form-group">
+                    <input type="text" name="nom" placeholder="Entrez votre nom">
+                    <button class="btn" type="submit">S'inscrire</button>
+                </div>
+            </form>
+            <a href="/start" class="btn_start">Démarrer le jeu</a>
+
+        </div>
+        <div>
+            <h2>Liste des joueurs :</h2>
+            <ul>
+                {% for player in players %}
+                    <li>{{ player.nom }}
+                          <form action="/supprimer_joueur" method="post" style="display:inline;">
+                            <input type="hidden" name="joueur_id" value="{{ player.id }}">
+                            <button type="submit">Supprimer</button>
+                          </form>
+                    </li>
+                {% endfor %}
+            </ul>
+        </div>
+    </div>
+</body>
+</html>

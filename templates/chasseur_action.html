@@ -1,0 +1,23 @@
+<html>
+<head>
+    <title>Jeu du Loup-Garou - Jour</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+    <div class="container">
+        <h1>Jour</h1>
+        <h2>Le Chasseur meurt</h2>
+        <p>Le Chasseur a été éliminé. Il peut effectuer son action avant de mourir.</p>
+        <form action="/chasseur_action" method="POST">
+            <label for="player">Sélectionnez un joueur à éliminer :</label>
+            <select class="liste" name="player" id="player">
+                {% for player in players %}
+                    <option value="{{ player }}">{{ player }}</option>
+                {% endfor %}
+            </select>
+            <br><br>
+            <input class="btn" type="submit" value="Éliminer">
+        </form>
+    </div>
+</body>
+</html>

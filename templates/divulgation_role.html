@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Divulgation des rôles</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+    <style>
+        .hidden {
+            display: none;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Divulgation des rôles</h1>
+        <h2>Rôle de {{ player.nom }}</h2>
+        <p id="role" class="hidden">{{ player.role }}</p>
+        <button class="btn_start" id="afficher-role" onclick="afficherRole()">Afficher le rôle</button>
+        <img style="border-radius: 10px" id="image" class="hidden" src="/static/images/{{ player.role }}.png" alt="{{ player.role }}">
+        <form action="{{ url_for('passer_au_joueur_suivant', player_id=player.id) }}" method="POST">
+            <input class="btn_start" type="submit" value="Passer au joueur suivant">
+        </form>
+
+        <script>
+            function afficherRole() {
+                var imageElement = document.getElementById("image");
+                imageElement.classList.remove("hidden");
+                var roleElement = document.getElementById("role");
+                roleElement.classList.remove("hidden");
+                document.getElementById("afficher-role").style.display = "none";
+            }
+        </script>
+    </div>
+</body>
+</html>
+

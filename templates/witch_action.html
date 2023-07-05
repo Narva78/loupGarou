@@ -1,0 +1,191 @@
+<html>
+<head>
+    <title>Jeu du Loup-Garou - Nuit</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+
+<style>
+body {
+    font-family: Arial, sans-serif;
+    background-color: #f4f4f4;
+    margin: 0;
+    padding: 20px;
+}
+
+.container {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    max-width: 500px;
+    margin: 0 auto;
+    background-color: #fff;
+    padding: 30px;
+    border-radius: 5px;
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
+}
+
+h1 {
+    color: #333;
+    text-align: center;
+    margin-bottom: 30px;
+}
+
+h2 {
+    color: #333;
+    margin-bottom: 10px;
+    text-align: center;
+    margin-bottom: 30px;
+}
+
+p {
+    color: #333;
+    margin-bottom: 20px;
+    text-align: center;
+}
+
+.btn {
+    display: block;
+    width: 120px;
+    margin: 0 auto;
+    padding: 10px 20px;
+    font-size: 16px;
+    border-radius: 5px;
+    background-color: #333;
+    color: #fff;
+    text-align: center;
+    text-decoration: none;
+    transition: background-color 0.3s;
+    margin-top: 0px;
+}
+
+.btn:hover {
+    background-color: #555;
+}
+
+.result-text {
+    font-size: 18px;
+    margin-top: 20px;
+}
+
+ul {
+    list-style-type: none;
+    padding: 0;
+}
+
+li {
+    margin-bottom: 10px;
+    padding: 10px;
+    border-radius: 5px;
+    background-color: #f9f9f9;
+}
+
+form {
+    text-align: center;
+    margin-bottom: 20px;
+}
+
+.form-group {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-bottom: 20px;
+}
+
+input[type="text"] {
+    padding: 10px;
+    font-size: 16px;
+    border-radius: 5px;
+    border: 1px solid #ccc;
+    flex: 1;
+    margin-right: 10px;
+    box-sizing: border-box;
+}
+
+
+.btn_start {
+    display: flex;
+    justify-content: center;
+    padding: 10px 20px;
+    font-size: 16px;
+    border-radius: 5px;
+    background-color: #333;
+    color: #fff;
+    text-decoration: none;
+    transition: background-color 0.3s;
+    margin-top: 20px;
+}
+
+.btn_start:hover {
+background-color: #555;
+}
+
+
+a:hover {
+    text-decoration: underline;
+}
+
+.liste {
+    display: block;
+    width: 100%;
+    padding: 10px;
+    font-size: 16px;
+    border-radius: 5px;
+    border: 1px solid #ccc;
+    background-color: #fff;
+    color: #333;
+    transition: border-color 0.3s;
+}
+
+.liste:focus {
+    outline: none;
+    border: 1px solid #333;
+}
+
+.liste option {
+    padding: 10px;
+}
+
+.form_group {
+    display: flex;
+    align-items: center;
+    margin-bottom: 20px;
+}
+</style>
+
+<body>
+    <div class="container">
+        <h1>Nuit</h1>
+        <h2>La Sorcière se réveille</h2>
+        <!--{% if sorciere_action_heal %} -->
+            <h3>Action disponible : Sauver un joueur</h3>
+            <p>La Sorcière peut sauver un joueur ce tour-ci.</p>
+            <form action="/sorciere_heal_action" method="POST">
+                <label for="player">Sélectionnez un joueur à sauver :</label>
+                <select class="liste" name="player" id="player">
+                    <!--{% for player in players %}-->
+                        <option value="{{ player }}">{{ player }}</option>
+                    <!--{% endfor %}-->
+                </select>
+                <br><br>
+                <input class="btn" type="submit" value="Sauver">
+            </form>
+        <!--{% elif sorciere_action_kill %}-->
+            <h3>Action disponible : Éliminer un joueur</h3>
+            <p>La Sorcière peut éliminer un joueur ce tour-ci.</p>
+            <form action="/sorciere_kill_action" method="POST">
+                <label for="player">Sélectionnez un joueur à éliminer :</label>
+                <select class="liste" name="player" id="player">
+                    <!--{% for player in players %}-->
+                        <option value="{{ player }}">{{ player }}</option>
+                    <!--{% endfor %}-->
+                </select>
+                <br><br>
+                <input class="btn" type="submit" value="Éliminer">
+            </form>
+        <!--{% else %}-->
+            <p>La Sorcière ne peut effectuer aucune action ce tour-ci.</p>
+        <!--{% endif %}-->
+    </div>
+</body>
+</html>
