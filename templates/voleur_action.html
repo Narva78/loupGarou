@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Voleur - Action</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+    <style>
+        body {
+            background-image: url("/static/images/gvoleur.png");
+            background-size: cover;
+            background-repeat: no-repeat;
+            background-position: center;
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .container {
+            width: 400px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Voleur - Action</h1>
+        <p>Le Voleur a volé le rôle du joueur : {{ player.nom +' '+ player.role}}</p>
+        <p>Le {{voleur.nom +' '+voleur.role}} a maintenant le rôle de {{ player.nom }}</p>
+
+        <!-- AUDIO -->
+        <audio class="audio_voleur_action" src="{{ url_for('static', filename='music/voleur_action.mp3') }}" loop></audio>
+        <a class="btn" href="/cupidon">Suivant</a>
+    </div>
+
+    <script>
+        var audioPlayer = document.querySelector('.audio_voleur_action');
+
+        // Lancer automatiquement la musique
+        audioPlayer.autoplay = true;
+
+        // Volume de la musique
+        audioPlayer.volume = 0.1;
+    </script>
+</body>
+</html>

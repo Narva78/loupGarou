@@ -1,22 +1,56 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <title>Jeu du Loup Garou - Phase de Nuit</title>
+    <title>Nuit</title>
     <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+    <style>
+        body {
+            background-image: url("/static/images/_NUIT.jpg");
+            background-size: cover;
+            background-repeat: no-repeat;
+            background-position: center;
+            font-family: Arial, sans-serif;
+        }
+
+        .container {
+            width: 400px;
+            margin-top: 120px;
+        }
+    </style>
 </head>
 <body>
     <div class="container">
-        <h1>Phase de Nuit</h1>
-        <h2>Les rôles : </h2>
+        <h1>Nuit</h1>
+        <h2>Les Loups-Garous se réveillent</h2>
+        <p>Les Loups-Garous sont :</p>
         <ul>
-            {% for role, player in roles.items() %}
-                <li>{{ role }} : {{ player }}</li>
+            {% for player in players %}
+                <li>{{ player.nom }}</li>
             {% endfor %}
         </ul>
-        <form action="/night_action" method="post">
-            <!-- Ajoutez ici les champs et les boutons pour les actions de la nuit -->
-            <input type="submit" value="Continuer">
+        <form action="/wolf_voted" method="POST">
+            <p>Sélectionnez un joueur à éliminer : </p>
+            <select class="liste" name="voted_player">
+                {% for player in ortherPlayer %}
+                    <option value="{{ player.id }}">{{ player.nom }}</option>
+                {% endfor %}
+            </select>
+            <br><br>
+            <input class="btn" type="submit" value="Voter">
         </form>
+
+        <!-- AUDIO -->
+        <audio class="audio_nuit" src="{{ url_for('static', filename='music/AmbianceNuit.mp3') }}" loop></audio>
     </div>
+
+    <script>
+        var audioPlayer = document.querySelector('.audio_nuit');
+
+            //Lancer automatique de la musique
+            audioPlayer.autoplay = true;
+
+            //volume de la musique
+            audioPlayer.volume = 0.1;
+    </script>
 </body>
 </html>

@@ -4,16 +4,31 @@
     <title>Jeu du Loup-Garou - Nuit</title>
     <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
 </head>
+<style>
+    body {
+        background-image: url("/static/images/amour.png");
+        background-size: cover;
+        background-repeat: no-repeat;
+        background-position: center;
+        font-family: Arial, sans-serif;
+    }
+
+    .container {
+        width: 400px;
+        margin-top: 120px;
+    }
+
+</style>
 <body>
     <div class="container">
         <h1>Nuit</h1>
         <h2>Cupidon se réveille</h2>
         <p>Cupidon, sélectionnez deux joueurs à lier :</p>
-        <form action="/cupidon_action" method="POST">
+        <form action="/cupidon_action2" method="POST">
             <div class="form_group">
             <select class="liste" class="liste" name="player1" id="player1">
                 {% for player in players %}
-                    <option value="{{ player }}">{{ player }}</option>
+                    <option value="{{ player.nom }}">{{ player.nom }}</option>
                 {% endfor %}
             </select>
         </div>
@@ -21,12 +36,26 @@
             <br><br>
             <select class="liste" class="liste" name="player2" id="player2">
                 {% for player in players %}
-                    <option value="{{ player }}">{{ player }}</option>
+                    <option value="{{ player.nom }}">{{ player.nom }}</option>
                 {% endfor %}
             </select>
         </div>
             <input class="btn_start" type="submit" value="Lier 2 joueurs">
         </form>
+
+        <!-- AUDIO -->
+        <audio class="audio_cupidon" src="{{ url_for('static', filename='music/GoldenHour.mp3') }}" loop></audio>
+
     </div>
+    <script>
+        var audioPlayer = document.querySelector('.audio_cupidon');
+
+            //Lancer automatique de la musique
+            audioPlayer.autoplay = true;
+
+            //volume de la musique
+            audioPlayer.volume = 0.1;
+
+    </script>
 </body>
 </html>

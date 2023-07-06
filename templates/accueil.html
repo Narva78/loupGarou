@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Jeu du Loup Garou</title>
+    <!-- style.css-->
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/normalize/8.0.1/normalize.min.css">
+</head>
+<style>
+    body {
+        background-image: url("/static/images/image de présentation.jpg");
+        background-size: cover;
+        background-repeat: no-repeat;
+        background-position: center;
+        font-family: Arial, sans-serif;
+    }
+
+    .transparent {
+        display: flex;
+        justify-content: center;
+        align-items: row;
+        color: #000000;
+    }
+
+
+
+    .accueil {
+        background-color: #dd1616;
+        color: #F9F9F9;
+        border: none;
+        border-radius: 5px;
+        cursor: pointer;
+        margin-left: 10px;
+    }
+
+    .accueil:hover {
+        background-color: rgb(128, 9, 9);
+        color: #F9F9F9;
+    }
+</style>
+<body>
+    <div class="container">
+        <h1><u>Jeu du Loup Garou</u></h1>
+        <div>
+            <h2>Inscription des joueurs</h2>
+            <form action="/register" method="post">
+                <div class="form-group">
+                    <input type="text" name="nom" placeholder="Entrez votre nom">
+                    <button class="btn" type="submit">S'inscrire</button>
+                </div>
+            </form>
+            <a href="/start" class="btn_start">Démarrer le jeu</a>
+        </div>
+        <div>
+            <h2>Liste des joueurs :</h2>
+            <ul>
+                {% for player in players %}
+                    <li class="transparent">
+                        <span>{{ player.nom }}</span>
+                        <form action="/supprimer_joueur" method="post">
+                            <input type="hidden" name="joueur_id" value="{{ player.id }}">
+                            <button class="accueil" type="submit">Supprimer</button>
+                        </form>
+                    </li>
+                {% endfor %}
+            </ul>
+            <audio class="audio_accueil" id="audioPlayer" src="{{ url_for('static', filename='music/accueil.mp3') }}" autoplay loop></audio>
+        </div>
+    </div>
+
+    <script>
+        var audioPlayer = document.querySelector('.audio_accueil');
+
+        //Lancer automatique de la musique
+        audioPlayer.autoplay = true;
+
+        //volume de la musique
+        audioPlayer.volume = 0.1;
+    </script>
+</body>
+</html>

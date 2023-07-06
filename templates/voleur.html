@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Voleur</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+    <style>
+        body {
+            background-image: url("/static/images/gvoleur.png");
+            background-size: cover;
+            background-repeat: no-repeat;
+            background-position: center;
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .container {
+            width: 400px;
+        }
+
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Voleur</h1>
+        <p>Bienvenue ! Tu es le Voleur.</p>
+        <p>Tu as la possibilité de voler le rôle d'un joueur.</p>
+        <form action="/voleur_action" method="POST">
+            <p>Sélectionne un joueur dont tu veux voler le rôle :</p>
+            <select class="liste" name="player_id">
+                {% for player in players %}
+                    <option value="{{ player.id }}">{{ player.nom}}</option>
+                {% endfor %}
+            </select>
+            <br><br>
+            <input class="btn" type="submit" value="Voler le rôle">
+        </form>
+
+        <!-- AUDIO -->
+        <audio class="audio_voleur" src="{{ url_for('static', filename='music/voleurs.mp3') }}" loop></audio>
+    </div>
+
+    <script>
+        var audioPlayer = document.querySelector('.audio_voleur');
+
+        // Lancer automatiquement la musique
+        audioPlayer.autoplay = true;
+
+        // Volume de la musique
+        audioPlayer.volume = 0.1;
+    </script>
+</body>
+</html>

@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Voyante</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+    <style>
+        body {
+            background-image: url("/static/images/voyante.jpg");
+            background-size: cover;
+            background-repeat: no-repeat;
+            background-position: center;
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .container {
+            width: 400px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Voyante</h1>
+
+            <p>Bienvenue, {{ voyante.nom }} ! Tu es la Voyante.</p>
+            <p>Tu peux choisir un joueur pour connaître son rôle.</p>
+            <form action="/voyante_action" method="POST">
+                <p>Sélectionne un joueur pour voir son rôle :</p>
+                <select class="liste" name="player_id">
+                    {% for player in players %}
+                        <option value="{{ player.id }}">{{ player.nom }}</option>
+                    {% endfor %}
+                </select>
+                <br><br>
+                <input class="btn" type="submit" value="Voir le rôle">
+            </form>
+
+
+        <!-- AUDIO -->
+        <audio class="audio_voyance" src="{{ url_for('static', filename='music/Voyante.mp3') }}" loop></audio>
+    </div>
+
+    <script>
+        var audioPlayer = document.querySelector('.audio_voyance');
+
+        // Lancer automatiquement la musique
+        audioPlayer.autoplay = true;
+
+        // Volume de la musique
+        audioPlayer.volume = 0.1;
+    </script>
+</body>
+</html>

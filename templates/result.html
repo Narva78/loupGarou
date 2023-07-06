@@ -6,6 +6,25 @@
     <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/normalize/8.0.1/normalize.min.css">
 </head>
+<style>
+    body {
+            background-image: url("/static/images/image de présentation.jpg");
+            background-size: cover;
+            background-repeat: no-repeat;
+            background-position: center;
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+    .container {
+            width: 400px;
+            margin-top: 80px;
+        }
+</style>
 <body>
     <div class="container">
         <h1>Jeu du Loup Garou</h1>

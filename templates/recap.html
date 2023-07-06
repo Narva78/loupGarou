@@ -6,26 +6,38 @@
     <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/normalize/8.0.1/normalize.min.css">
 </head>
+<style>
+    body {
+            background-image: url("/static/images/image de présentation.jpg");
+            background-size: cover;
+            background-repeat: no-repeat;
+            background-position: center;
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+    .container {
+            width: 400px;
+            margin-top: 120px;
+        }
+</style>
 <body>
     <div class="container">
         <h1><u>Jeu du Loup Garou - Recap</u></h1>
         <h2>Rôles :</h2>
         <ul>
-            <li><strong>Loups-Garous :</strong> {{ roles['loups_garous']|join(', ') }}</li>
-            <li><strong>Voyante :</strong> {{ roles['voyante'] }}</li>
-            <li><strong>Villageois :</strong> {{ roles['villageois']|join(', ') }}</li>
-            {% if 'chasseur' in roles %}
-                <li><strong>Chasseur :</strong> {{ roles['chasseur'] }}</li>
-            {% endif %}
-            {% if 'sorciere' in roles %}
-                <li><strong>Sorcière :</strong> {{ roles['sorciere'] }}</li>
-            {% endif %}
-            {% if 'petite_fille' in roles %}
-                <li><strong>Petite Fille :</strong> {{ roles['petite_fille'] }}</li>
-            {% endif %}
-            {% if 'cupidon' in roles %}
-                <li><strong>Cupidon :</strong> {{ roles['cupidon'] }}</li>
-            {% endif %}
+            <li><strong>Loups-Garous :</strong> {{ loup|join(', ') }}</li>
+            <li><strong>Voyante :</strong> {{ voyante }}</li>
+            <li><strong>Villageois :</strong> {{ villageois|join(', ') }}</li>
+            <li><strong>Chasseur :</strong> {{ chasseur }}</li>
+            <li><strong>Sorcière :</strong> {{ sorciere }}</li>
+            <li><strong>Petite Fille :</strong> {{ petite_fille }}</li>
+            <li><strong>Cupidon :</strong> {{ cupidon }}</li>
+            <li><strong>Voleur :</strong> {{ voleur }}</li>
         </ul>
     </div>
 </body>

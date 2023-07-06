@@ -16,7 +16,7 @@
         <form action="/wolf_vote_action" method="post">
             <p>Votez pour éliminer un joueur :</p>
             <select name="eliminated_player">
-                {% for player in players %}
+                {% for player in other_player %}
                     <option value="{{ player }}">{{ player }}</option>
                 {% endfor %}
             </select>

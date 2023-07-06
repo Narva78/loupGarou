@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Village se Rendort</title>
+        <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+    </head>
+</html>
+<style>
+    body {
+               background-image: url("/static/images/village.jpg");
+               background-size: cover;
+               background-repeat: no-repeat;
+               background-position: center;
+               font-family: Arial, sans-serif;
+               margin: 0;
+               padding: 0;
+               height: 100vh;
+               display: flex;
+               justify-content: center;
+               align-items: center;
+           }
+       .container {
+           width: 400px;
+       }
+</style>
+<body>
+    <div class="container">
+        <h1>Village se Rendort</h1>
+        <p>Le village se rendort...</p>
+        <p>Le conseil a décidé de tuer : {{ voted_player.nom }}</p>
+        <a href="/night" class="btn_start" type="submit" value="Suivant">Suivant</a>
+
+        <!-- AUDIO -->
+        <audio class="audio_village_rendort" src="{{ url_for('static', filename='music/village_rendort.mp3') }}" loop></audio>
+    </div>
+
+    <script>
+        var audioPlayer = document.querySelector('.audio_village_rendort');
+
+        // Lancer automatiquement la musique
+        audioPlayer.autoplay = true;
+
+        // Volume de la musique
+        audioPlayer.volume = 0.1;
+    </script>
+</body>

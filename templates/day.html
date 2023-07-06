@@ -4,22 +4,51 @@
     <title>Jeu du Loup-Garou - Jour</title>
     <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
 </head>
+<style>
+    body {
+        background-image: url("/static/images/village.jpg");
+        background-size: cover;
+        background-repeat: no-repeat;
+        background-position: center;
+        font-family: Arial, sans-serif;
+    }
+
+    .container {
+        width: 400px;
+        margin-top: 120px;
+    }
+</style>
 <body>
     <div class="container">
-        <h1>Jour</h1>
+        <h1>Jour {{day_nb}}</h1>
         <h2>Le Village se réveille</h2>
+        <p>Bilan de la nuit : {{bilan}}</p>
         <h3>Discussion et vote</h3>
+        
         
         <form action="/vote" method="post">
             <label for="eliminated_player">Vote pour éliminer un joueur :</label>
             <select class="liste" id="eliminated_player" name="eliminated_player">
                 {% for player in players %}
-                    <option value="{{ player }}">{{ player }}</option>
+                    <option value="{{ player.id }}">{{ player.nom }}</option>
                 {% endfor %}
             </select>
             <br><br>
             <input class="btn" type="submit" value="Voter">
         </form>
+
+        <!-- AUDIO -->
+        <audio class="audio_jour" src="{{ url_for('static', filename='music/Le_village_se_réveille.mp3') }}" loop></audio>
     </div>
+
+    <script>
+        var audioPlayer = document.querySelector('.audio_jour');
+
+            //Lancer automatique de la musique
+            audioPlayer.autoplay = true;
+
+            //volume de la musique
+            audioPlayer.volume = 0.1;
+    </script>
 </body>
 </html>

@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Voyante - Rôle du Joueur</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+    <style>
+        body {
+            background-image: url("/static/images/voyante.jpg");
+            background-size: cover;
+            background-repeat: no-repeat;
+            background-position: center;
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .container {
+            width: 400px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Voyante - Rôle du Joueur</h1>
+
+        {% if player %}
+            <p>Le joueur {{ player.nom }} a le rôle de {{ player.role }}.</p>
+        {% else %}
+            <p>Aucun joueur sélectionné.</p>
+        {% endif %}
+
+        <a class="btn" href="/voleur">Suivant</a>
+
+        <!-- AUDIO -->
+        <audio class="audio_voyance" src="{{ url_for('static', filename='music/Voyante.mp3') }}" loop></audio>
+    </div>
+
+    <script>
+        var audioPlayer = document.querySelector('.audio_voyance');
+
+        // Lancer automatiquement la musique
+        audioPlayer.autoplay = true;
+
+        // Volume de la musique
+        audioPlayer.volume = 0.1;
+    </script>
+</body>
+</html>

@@ -1,35 +1,71 @@
 <!DOCTYPE html>
 <html>
-<head>
-    <title>Divulgation des rôles</title>
-    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
-    <style>
-        .hidden {
-            display: none;
-        }
-    </style>
-</head>
-<body>
-    <div class="container">
-        <h1>Divulgation des rôles</h1>
-        <h2>Rôle de {{ player.nom }}</h2>
-        <p id="role" class="hidden">{{ player.role }}</p>
-        <button class="btn_start" id="afficher-role" onclick="afficherRole()">Afficher le rôle</button>
-        <img style="border-radius: 10px" id="image" class="hidden" src="/static/images/{{ player.role }}.png" alt="{{ player.role }}">
-        <form action="{{ url_for('passer_au_joueur_suivant', player_id=player.id) }}" method="POST">
-            <input class="btn_start" type="submit" value="Passer au joueur suivant">
-        </form>
-
-        <script>
-            function afficherRole() {
-                var imageElement = document.getElementById("image");
-                imageElement.classList.remove("hidden");
-                var roleElement = document.getElementById("role");
-                roleElement.classList.remove("hidden");
-                document.getElementById("afficher-role").style.display = "none";
+    <head>
+        <title>Divulgation des rôles</title>
+        <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+        <style>
+            .hidden {
+                display: none;
             }
-        </script>
-    </div>
-</body>
-</html>
+            body {
+                background-image: url("/static/images/image de présentation.jpg");
+                background-size: cover;
+                background-repeat: no-repeat;
+                background-position: center;
+                font-family: Arial, sans-serif;
+                margin: 0;
+                padding: 0;
+                height: 100vh;
+                display: flex;
+                justify-content: center;
+                align-items: center;
+            }
 
+            .container {
+                width: 400px;
+            }
+        </style>
+    </head>
+    <body>
+        <div class="container">
+            <h1>Divulgation des rôles</h1>
+            <h2>Rôle de {{ player.nom }}</h2>
+            <p id="role" class="hidden">{{ player.role }}</p>
+            <button class="btn_start" id="afficher-role" onclick="afficherRole()">Afficher le rôle</button>
+            <img style="border-radius: 10px" id="image" class="hidden" src="/static/images/{{ player.role }}.png" alt="{{ player.role }}">
+            <form action="{{ url_for('passer_au_joueur_suivant', player_id=player.id) }}" method="POST">
+                <input class="btn_start" type="submit" value="Passer au joueur suivant">
+            </form>
+
+            <script>
+                function afficherRole() {
+                    var imageElement = document.getElementById("image");
+                    imageElement.classList.remove("hidden");
+                    var roleElement = document.getElementById("role");
+                    roleElement.classList.remove("hidden");
+                    document.getElementById("afficher-role").style.display = "none";
+                }
+
+                // Récupérer l'état de lecture de la musique dans le stockage local
+                var isMusicPlaying = localStorage.getItem('isMusicPlaying');
+
+                // Vérifier si la musique était en cours de lecture avant le rechargement de la page
+                if (isMusicPlaying === 'true') {
+                    var audioPlayer = document.querySelector('.audio_role');
+                    audioPlayer.play(); // Reprendre la lecture de la musique
+                }
+
+                // Ajouter un événement de clic au bouton de passage au joueur suivant pour enregistrer l'état de lecture de la musique
+                var submitButton = document.querySelector('input[type="submit"]');
+                submitButton.addEventListener('click', function () {
+                    // Mettre à jour l'état de lecture de la musique dans le stockage local
+                    var audioPlayer = document.querySelector('.audio_role');
+                    localStorage.setItem('isMusicPlaying', audioPlayer.paused ? 'false' : 'true');
+                });
+            </script>
+
+            <!-- AUDIO -->
+            <audio class="audio_role" src="{{ url_for('static', filename='music/divulgationRole.mp3') }}" autoplay loop></audio>
+        </div>
+    </body>
+</html>

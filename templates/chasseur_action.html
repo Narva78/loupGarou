@@ -3,6 +3,20 @@
     <title>Jeu du Loup-Garou - Jour</title>
     <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
 </head>
+<style>
+    body {
+        background-image: url("/static/images/electrotinette-chasseur.jpg");
+        background-size: cover;
+        background-repeat: no-repeat;
+        background-position: center;
+        font-family: Arial, sans-serif;
+    }
+
+    .container {
+        width: 400px;
+        margin-top: 120px;
+    }
+</style>
 <body>
     <div class="container">
         <h1>Jour</h1>
@@ -11,13 +25,26 @@
         <form action="/chasseur_action" method="POST">
             <label for="player">Sélectionnez un joueur à éliminer :</label>
             <select class="liste" name="player" id="player">
-                {% for player in players %}
-                    <option value="{{ player }}">{{ player }}</option>
+                {% for player_for_chasseur in players_for_chasseur %}
+                    <option value="{{ player_for_chasseur.id }}">{{ player_for_chasseur.nom }}</option>
                 {% endfor %}
             </select>
             <br><br>
             <input class="btn" type="submit" value="Éliminer">
         </form>
+
+        <!-- AUDIO -->
+        <audio class="audio_chasseur" src="{{ url_for('static', filename='music/vengeanceChasseur.mp3') }}" loop></audio>
     </div>
+
+    <script>
+        var audioPlayer = document.querySelector('.audio_chasseur');
+
+        //Lancer automatique de la musique
+        audioPlayer.autoplay = true;
+
+        //volume de la musique
+        audioPlayer.volume = 0.1;
+    </script>
 </body>
 </html>

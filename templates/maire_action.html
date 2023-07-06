@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Élection du maire</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<style>
+    body {
+        background-image: url("/static/images/electrotinette-maire.jpg");
+        background-size: cover;
+        background-repeat: no-repeat;
+        background-position: center;
+        font-family: Arial, sans-serif;
+    }
+
+    .container {
+        width: 400px;
+        margin-top: 120px;
+    }
+</style>
+<body>
+    <div class="container">
+        <h1>Élection du maire</h1>
+        <p>Votez pour le maire :</p>
+        <form method="POST">
+            <select class="liste" name="voted_player">
+                {% for player in players %}
+                    <option value="{{ player }}">{{ player }}</option>
+                {% endfor %}
+            </select>
+            <br><br>
+            <input class="btn" type="submit" value="Voter">
+        </form>
+    </div>
+</body>
+</html>
